@@ -45,30 +45,6 @@ const VacancyBox = React.createClass({
   }
 });
 
-/*const VacancyRow = React.createClass({
-  getInitialState: function() {
-    return { cols: [] }
-  },
-
-  render() {
-    const cols = this.props.cols.map(function(vacancy) {
-      return <VacancyCol key={vacancy.id} data={vacancy} />
-    });
-    return <div className="row">{cols}</div>
-  }
-});
-
-const VacancyCol = React.createClass({
-  render() {
-    return (
-      <div key={this.props.data.id} className="col-md-4 col-xs-12">
-        <h3><Link to={`/vacancies/${this.props.data.id}`}>{this.props.data.title}</Link></h3>
-        <VacancyInfo data={this.props.data} />
-      </div>
-    )
-  }
-});*/
-
 const Vacancy = React.createClass({
   getInitialState: () => {
     return { data: {} }
