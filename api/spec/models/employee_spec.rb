@@ -9,6 +9,7 @@ RSpec.describe Employee, :type => :model do
     it { should validate_presence_of(:email) }
     it { should validate_presence_of(:phone) }
     it { should validate_numericality_of(:salary) }
+    it { should ensure_inclusion_of(:status).in_array(Employee::STATUS) }
     it { should_not allow_value(0).for(:salary) }
 
     describe 'name' do
