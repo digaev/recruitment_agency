@@ -1,6 +1,8 @@
 class Employee < ActiveRecord::Base
   acts_as_taggable_on :skills
 
+  STATUS = ['free', 'busy']
+
   attr_accessible :address, :email, :name, :phone, :salary, :status, :skill_list
 
   before_save :prettify_name!
@@ -12,7 +14,7 @@ class Employee < ActiveRecord::Base
   validates :name, presence: true
   validates :phone, presence: true
   validates :salary, numericality: { greater_than: 0 }
-  validates :status, inclusion: { in: ['free', 'busy'] }
+  validates :status, inclusion: { in: STATUS }
 
   validate :validate_name
   validate :validate_skills

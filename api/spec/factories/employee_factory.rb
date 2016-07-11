@@ -3,6 +3,7 @@ FactoryGirl.define do
     address { "#{ Faker::Address.city }, #{ Faker::Address.street_address }" }
     email { Faker::Internet.email }
     phone { Faker::PhoneNumber.cell_phone }
+    status { Employee::STATUS.sample }
 
     factory :employee_with_salary do
       salary { rand(1..1000) }
