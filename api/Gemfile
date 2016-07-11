@@ -1,0 +1,20 @@
+source 'https://rubygems.org'
+
+gem 'rails', '~> 3.2'
+
+gem 'acts-as-taggable-on', '~> 3.4'
+gem 'email_validator'
+gem 'jbuilder'
+gem 'pg'
+gem 'rack-cors', require: 'rack/cors'
+
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'rspec-rails'
+  gem 'test-unit'
+end
+
+group :test do
+  gem 'shoulda-matchers'
+end
