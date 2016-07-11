@@ -4,6 +4,7 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     phone { Faker::PhoneNumber.cell_phone }
     status { Employee::STATUS.sample }
+    skill_list { ['skill'] }
 
     factory :employee_with_salary do
       salary { rand(1..1000) }
