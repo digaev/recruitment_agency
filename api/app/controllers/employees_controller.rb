@@ -4,7 +4,7 @@ class EmployeesController < ApplicationController
   before_filter :prepare_params, only: [:create]
 
   def index
-    @employees = Employee.order('created_at desc')
+    @employees = Employee.order('created_at desc').preload(:skill_names)
   end
 
   def create
@@ -28,12 +28,14 @@ class EmployeesController < ApplicationController
 
   def set_vacancies
     @most_matched_vacancies = @employee.most_matched_vacancies.order('salary desc')
+    @most_matched_vacancies = @most_matched_vacancies.preload(:skill_names)
 
     ids = @most_matched_vacancies.map(&:id)
 
     @vacancies = @employee.vacancies
     @vacancies = @vacancies.where('vacancies.id NOT IN (?)', ids) if ids.any?
     @vacancies = @vacancies.order('salary asc')
+    @vacancies = @vacancies.preload(:skill_names)
   end
 
   def prepare_params

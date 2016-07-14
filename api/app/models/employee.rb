@@ -22,7 +22,7 @@ class Employee < ActiveRecord::Base
   validate :validate_skills
 
   def skill_list
-    @skill_list ||= skill_names.pluck(:name)
+    @skill_list ||= self.skill_names.map(&:name)
   end
 
   def skill_list=(list)
