@@ -4,6 +4,10 @@ class Employee < ActiveRecord::Base
   attr_accessible :address, :email, :name, :phone, :salary, :status, :skill_list
 
   before_save :prettify_name!
+  after_create :create_skills!
+
+  has_many :skills, as: :skillable
+  has_many :skill_names, through: :skills
 
   validates :address, length: { minimum: 10 }
   validates :address, presence: true
@@ -17,18 +21,46 @@ class Employee < ActiveRecord::Base
   validate :validate_name
   validate :validate_skills
 
+  def skill_list
+    @skill_list ||= skill_names.pluck(:name)
+  end
+
+  def skill_list=(list)
+    raise TypeError unless list.is_a?(Array)
+    @skill_list = list
+  end
+
   def vacancies
-    Vacancy.tagged_with(self.skills, on: :skills, any: true)
+    skills = Skill.select(:skillable_id)
+    skills = skills.joins(:skill_name)
+    skills = skills.where(skillable_type: Vacancy)
+    skills = skills.where('skill_names.name = ANY (ARRAY[?])', self.skill_list)
+    Vacancy.where("id IN (#{ skills.to_sql })") # skills.pluck(:skillable_id)
   end
 
   def most_matched_vacancies
-    Vacancy.tagged_with(self.skills, on: :skills, match: true)
+    skills = Skill.select('skillable_id, array_agg(skill_names.name) AS vacancy_skills')
+    skills = skills.joins(:skill_name)
+    skills = skills.where(skillable_type: Vacancy)
+    skills = skills.group(:skillable_id)
+
+    skills = Skill.from("(#{ skills.to_sql }) AS skills")
+    skills = skills.where(
+      "vacancy_skills::text[] @> ARRAY[?]", self.skill_list
+    )
+
+    skills = Skill.select(:skillable_id).from("(#{ skills.to_sql }) AS skills")
+    Vacancy.where("id IN (#{ skills.to_sql })")
   end
 
   private
 
   def prettify_name!
     self.name = self.name.split(' ').join(' ') if name_changed?
+  end
+
+  def create_skills!
+    Skill.create_skills_for(self)
   end
 
   def validate_name

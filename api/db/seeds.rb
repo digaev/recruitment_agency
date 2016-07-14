@@ -38,7 +38,7 @@ ActiveRecord::Base.transaction do
       address: fake_address,
       expire_at: Faker::Date.between(Date.today, Date.today + 2.months)
     )
-    vacancy.skill_list = SKILLS.sample(rand(1..5)).join(',')
+    vacancy.skill_list = SKILLS.sample(rand(1..5))
     vacancy.save!
 
     employee = Employee.create(
@@ -49,7 +49,7 @@ ActiveRecord::Base.transaction do
       salary: fake_salary,
       status: Employee::STATUS.sample
     )
-    employee.skill_list = SKILLS.sample(rand(1..5)).join(',')
+    employee.skill_list = SKILLS.sample(rand(1..5))
     employee.save!
   end
 end
