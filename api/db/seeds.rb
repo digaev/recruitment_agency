@@ -46,7 +46,8 @@ ActiveRecord::Base.transaction do
       email: Faker::Internet.email,
       name: fake_employee_name,
       phone: Faker::PhoneNumber.cell_phone,
-      salary: fake_salary
+      salary: fake_salary,
+      status: Employee::STATUS.sample
     )
     employee.skill_list = SKILLS.sample(rand(1..5)).join(',')
     employee.save!
