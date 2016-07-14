@@ -26,8 +26,8 @@ class Employee < ActiveRecord::Base
   end
 
   def skill_list=(list)
-    raise TypeError unless list.is_a?(Array)
-    @skill_list = list
+    raise TypeError if list.present? && !list.is_a?(Array)
+    @skill_list = list || []
   end
 
   def vacancies
