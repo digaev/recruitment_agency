@@ -24,13 +24,10 @@ def fake_vacancy_title
 end
 
 def fake_employee_name
-  [
-    'Иванов Иван Иванович',
-    'Петров Адрей Владимирович',
-    'Сидоров Петр Алексеевич',
-    'Степанов Николай Сергеевич',
-    'Потапов Дмитрий Анатольевич'
-  ].sample
+  loop do
+    name = Faker::Name.name
+    return name if name.count(' ') == 2
+  end
 end
 
 ActiveRecord::Base.transaction do
