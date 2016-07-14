@@ -78,7 +78,7 @@ const Employee = React.createClass({
     const others = this.state.data.vacancies.others.map((vacancy) => {
       return (
         <div>
-          <h3><Link to={`/vacancies/${vacancy.id}`}>{vacancy.name}</Link></h3>
+          <h3><Link to={`/vacancies/${vacancy.id}`}>{vacancy.title}</Link></h3>
           <VacancyInfo data={vacancy} />
         </div>
       )
