@@ -34,14 +34,14 @@ class Vacancy < ActiveRecord::Base
   end
 
   def most_matched_employees
-    skills = Skill.select('skillable_id, array_agg(skill_names.name) AS vacancy_skills')
+    skills = Skill.select('skillable_id, array_agg(skill_names.name) AS employee_skills')
     skills = skills.joins(:skill_name)
     skills = skills.where(skillable_type: Employee)
     skills = skills.group(:skillable_id)
 
     skills = Skill.from("(#{ skills.to_sql }) AS skills")
     skills = skills.where(
-      "vacancy_skills::text[] @> ARRAY[?]", self.skill_list
+      "employee_skills::text[] @> ARRAY[?]", self.skill_list
     )
 
     skills = Skill.select(:skillable_id).from("(#{ skills.to_sql }) AS skills")
