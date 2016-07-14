@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2'
 
-gem 'acts-as-taggable-on', '~> 3.4'
 gem 'email_validator'
 gem 'jbuilder'
 gem 'pg'

@@ -1,6 +1,4 @@
 class Employee < ActiveRecord::Base
-  acts_as_taggable_on :skills
-
   STATUS = ['free', 'busy']
 
   attr_accessible :address, :email, :name, :phone, :salary, :status, :skill_list

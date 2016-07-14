@@ -1,6 +1,4 @@
 class Vacancy < ActiveRecord::Base
-  acts_as_taggable_on :skills
-
   attr_accessible :address, :expire_at, :salary, :title, :skill_list
 
   validates :address, length: { minimum: 10 }
