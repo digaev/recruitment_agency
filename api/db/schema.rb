@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -9,48 +8,31 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160709052537) do
+ActiveRecord::Schema.define(version: 20161121144158) do
 
-  create_table "employees", :force => true do |t|
-    t.string   "name"
-    t.string   "address"
-    t.float    "salary"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "status"
-    t.string   "email"
-    t.string   "phone"
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "employees", force: :cascade do |t|
+    t.string   "name",                    null: false
+    t.string   "address",                 null: false
+    t.float    "salary",                  null: false
+    t.string   "skills",     default: [],              array: true
+    t.string   "status",                  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
-  create_table "taggings", :force => true do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
-    t.string   "taggable_type"
-    t.integer  "tagger_id"
-    t.string   "tagger_type"
-    t.string   "context",       :limit => 128
-    t.datetime "created_at"
-  end
-
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], :name => "taggings_idx", :unique => true
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
-
-  create_table "tags", :force => true do |t|
-    t.string  "name"
-    t.integer "taggings_count", :default => 0
-  end
-
-  add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
-
-  create_table "vacancies", :force => true do |t|
-    t.string   "title"
-    t.float    "salary"
-    t.date     "expire_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "address"
+  create_table "vacancies", force: :cascade do |t|
+    t.string   "title",                   null: false
+    t.string   "address",                 null: false
+    t.float    "salary",                  null: false
+    t.date     "expire_at",               null: false
+    t.string   "skills",     default: [],              array: true
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
 end

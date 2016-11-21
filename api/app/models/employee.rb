@@ -1,55 +1,30 @@
-class Employee < ActiveRecord::Base
-  acts_as_taggable_on :skills
-
-  STATUS = ['free', 'busy']
-
-  attr_accessible :address, :email, :name, :phone, :salary, :status, :skill_list
+class Employee < ApplicationRecord
+  STATUS = %w(free busy).freeze
 
   before_save :prettify_name!
 
   validates :address, length: { minimum: 10 }
-  validates :address, presence: true
   validates :email, presence: true, email: true
   validates :name, length: { minimum: 5 }
-  validates :name, presence: true
   validates :phone, presence: true
   validates :salary, numericality: { greater_than: 0 }
+  validates :skills, presence: true
   validates :status, inclusion: { in: STATUS }
 
   validate :validate_name
-  validate :validate_skills
-
-  def vacancies
-    Vacancy.tagged_with(self.skills, on: :skills, any: true)
-  end
-
-  def most_matched_vacancies
-    Vacancy.tagged_with(self.skills, on: :skills, match: true)
-  end
 
   private
 
   def prettify_name!
-    self.name = self.name.split(' ').join(' ') if name_changed?
+    self.name = name.split(' ').join(' ') if name_changed?
   end
 
   def validate_name
-    errors.add(
-      :name,
-      'must contains only cyrillic letters and spaces'
-    ) and return unless self.name.to_s.match(/^[а-яА-ЯёЁ ]+$/)
+    unless name.to_s =~ /^[а-яА-ЯёЁ ]+$/
+      errors.add(:name, 'must contains only cyrillic letters and spaces')
+    end
 
-    errors.add(
-      :name,
-      'must consist of three words'
-    ) and return unless self.name.to_s.split(' ').length == 3
-  end
-
-  # FIXME DRY
-  def validate_skills
-    errors.add(
-      :skill,
-      'must be at least one'
-    ) and return if self.skill_list.length.zero?
+    return if name.to_s.split(' ').length == 3
+    errors.add(:name, 'must consist of three words')
   end
 end
