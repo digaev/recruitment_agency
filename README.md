@@ -1,4 +1,13 @@
-# Installation
+# What
+
+This is the demo project. A simple SPA with using RoR 5 (PostgreSQL) & React.js.
+
+* Add employees
+* Add vacancies
+* Tag with skills each vacancy/employee
+* Search best vacancies/employees for individual employee/vacancy
+
+## Installation
 
 ```
 git clone https://github.com/digaev/recruitment_agency.git
