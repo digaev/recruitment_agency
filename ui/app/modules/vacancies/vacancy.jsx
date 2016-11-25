@@ -20,7 +20,6 @@ class Vacancy extends React.Component {
   }
 
   render() {
-    // FIXME
     if (!this.state.data.id) {
       return <div>Loading...</div>;
     }
