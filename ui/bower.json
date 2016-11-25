@@ -16,9 +16,8 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap-css": "^3.3.6",
-    "bootstrap3-typeahead": "^4.0.1",
-    "eonasdan-bootstrap-datetimepicker": "^4.17.37",
-    "jquery": "2"
+    "bootstrap": "^3.3.7",
+    "typeahead.js": "^0.11.1",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.43"
   }
 }

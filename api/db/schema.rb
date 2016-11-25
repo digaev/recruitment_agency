@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20161121144158) do
   create_table "employees", force: :cascade do |t|
     t.string   "name",                    null: false
     t.string   "address",                 null: false
+    t.string   "email",                   null: false
+    t.string   "phone",                   null: false
     t.float    "salary",                  null: false
     t.string   "skills",     default: [],              array: true
     t.string   "status",                  null: false

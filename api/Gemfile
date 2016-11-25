@@ -1,11 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'active_model_serializers', '~> 0.10.0'
 gem 'email_validator'
+gem 'jbuilder'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'rack-cors'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails-i18n', '~> 5.0.0'
+gem 'yajl-ruby', require: 'yajl'
 
 group :development, :test do
   gem 'byebug', platform: :mri

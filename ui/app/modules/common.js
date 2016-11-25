@@ -1,13 +1,15 @@
 function splitArrayIntoChunks(array, chunkSize) {
-  let result = [];
+  const sz = parseInt(chunkSize, 10);
+  const result = [];
 
-  chunkSize = parseInt(chunkSize);
-  if (!isNaN(chunkSize) && chunkSize > 0) {
-    for (let i = 0, j = array.length; i < j; i += chunkSize) {
-      result.push(array.slice(i, i + chunkSize));
+  if (!isNaN(sz) && sz > 0) {
+    for (let i = 0, j = array.length; i < j; i += sz) {
+      result.push(array.slice(i, i + sz));
     }
   }
   return result;
 }
 
-module.exports = { splitArrayIntoChunks }
+export {
+  splitArrayIntoChunks, // eslint-disable-line import/prefer-default-export
+};
