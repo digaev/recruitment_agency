@@ -21,8 +21,4 @@ class EmployeesController < ApplicationController
       :address, :email, :name, :phone, :salary, :status, skills: []
     )
   end
-
-  def set_employee
-    @employee = Employee.find(params[:id])
-  end
 end
