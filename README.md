@@ -39,7 +39,7 @@ yarn install
 bower install
 ```
 
-## Start
+## Starting
 
 ```
 # install foreman
@@ -47,6 +47,5 @@ gem install foreman
 
 # start server
 foreman start
-
-# now open in browser http:://localhost:8080
 ```
+Now open in browser [http://localhost:8080](http://localhost:8080)
