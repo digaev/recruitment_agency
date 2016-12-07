@@ -25,9 +25,6 @@ bundle exec rspec
 
 # add some seed data
 rake db:seed
-
-# start server
-rails s
 ```
 
 ## UI
@@ -36,11 +33,20 @@ rails s
 cd ./recruitment_agency/ui
 
 # install node packages
-npm install
+yarn install
 
 # install bower components
 bower install
+```
+
+## Start
+
+```
+# install foreman
+gem install foreman
 
 # start server
-npm start
+foreman start
+
+# now open in browser http:://localhost:8080
 ```
